@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#990000">
+  
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="apple-itunes-app" content="app-id=480883488">
+<link rel="manifest" href="/web-app-manifest/manifest.json">
+  <meta name="sentry-trace" content="3f48ac4d62704847baa11ef34ac8864d-e40dedd15d6743ad-0"/>
+  <title>P8: Ice Cover Regression</title>
+
+  <link rel="preload" href="https://du11hjcvx0uqb.cloudfront.net/dist/fonts/lato/extended/Lato-Regular-bd03a2cc27.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="https://du11hjcvx0uqb.cloudfront.net/dist/fonts/lato/extended/Lato-Bold-cccb897485.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="https://du11hjcvx0uqb.cloudfront.net/dist/fonts/lato/extended/Lato-Italic-4eb103b4d1.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/no_variables/bundles/fonts-6ee09b0b2f.css" media="screen" />
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/cc220c0ff1277de99d472b6dc63ee650/variables-7dd4b80918af0e0218ec0229e4bd5873.css" media="all" />
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_normal_contrast/bundles/common-9a935dbdba.css" media="all" />
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_normal_contrast/bundles/assignments-9538b12c90.css" media="screen" />
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_normal_contrast/bundles/learning_outcomes-0ef38391dc.css" media="screen" />
+  <link rel="stylesheet" href="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_normal_contrast/bundles/new_user_tutorials-6b15f87caf.css" media="screen" />
+  <link rel="apple-touch-icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/apple-touch-icon-585e5d997d.png" />
+  <link rel="icon" type="image/x-icon" href="https://du11hjcvx0uqb.cloudfront.net/dist/images/favicon-e10d657a73.ico" />
+
+  <link rel="stylesheet" href="https://instructure-uploads.s3.amazonaws.com/account_83960000000000001/attachments/38736063/Madison_041624.css" media="all" />
+  
+  <script>if (navigator.userAgent.match(/(MSIE|Trident\/)/)) location.replace('/ie-is-not-supported.html')</script>
+  <script>
+    INST = {"environment":"production","allowMediaComments":true,"kalturaSettings":{"domain":"nv.instructuremedia.com","resource_domain":"nv.instructuremedia.com","rtmp_domain":"iad.rtmp.instructuremedia.com","partner_id":"9","subpartner_id":"0","player_ui_conf":"0","kcw_ui_conf":"0","upload_ui_conf":"0","max_file_size_bytes":534773760,"do_analytics":false,"hide_rte_button":false,"js_uploader":true},"logPageViews":true,"editorButtons":[{"name":"YouTube","id":63,"favorite":false,"url":"https://www.edu-apps.org/lti_public_resources/?tool_id=youtube","icon_url":"https://www.edu-apps.org/assets/lti_public_resources/youtube_icon.png","canvas_icon_class":null,"width":560,"height":600,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eSearch publicly available YouTube videos. A new icon will show up in your course rich editor letting you search YouTube and click to embed videos in your course material.\u003c/p\u003e\n"},{"name":"Vimeo","id":64,"favorite":false,"url":"https://www.edu-apps.org/lti_public_resources/?tool_id=vimeo","icon_url":"https://www.edu-apps.org/assets/lti_public_resources/vimeo_icon.png","canvas_icon_class":null,"width":560,"height":600,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eVimeo is a video sharing website on which users can upload, share, and view videos. The community of Vimeo includes indie, professional, and novice filmmakers.\u003c/p\u003e\n"},{"name":"GoogleApps","id":354,"favorite":false,"url":"https://google-drive-lti-iad-prod.instructure.com/lti/rce-content-selection","icon_url":"https://google-drive-lti-iad-prod.instructure.com/icon.png","canvas_icon_class":null,"width":700,"height":600,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eAllows you to pull in documents from Google Drive to Canvas\u003c/p\u003e\n"},{"name":"Office 365","id":690,"favorite":false,"url":"https://office365-iad-prod.instructure.com/lti/rce-content-item","icon_url":"https://office365-iad-prod.instructure.com/images/office365_icon.png","canvas_icon_class":null,"width":900,"height":600,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eAllows you to pull in documents from Office 365 to Canvas\u003c/p\u003e\n"},{"name":"BOX","id":691,"favorite":false,"url":"https://www.edu-apps.org/box/","icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png","canvas_icon_class":null,"width":430,"height":200,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eEmbed files from Box\u003c/p\u003e\n"},{"name":"Commons Favorites","id":4963,"favorite":false,"url":"https://lor.instructure.com/api/lti/favorite-resources","icon_url":"https://lor.instructure.com/img/icon_commons.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":true,"on_by_default":false,"description":"\u003cp\u003eFind and share course content\u003c/p\u003e\n"},{"name":"SAGE Vantage LTI 1.3 - editor_button","id":16667,"favorite":false,"url":"https://vantage.sagepub.com/lti1p3/tool/F2qexkPLRCSA0Qgi","icon_url":"https://vantage.sagepub.com/images/sagent/Bird-blue-right.svg","canvas_icon_class":null,"width":1000,"height":1000,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eSAGE Vantage 1.3 Tool\u003c/p\u003e\n"},{"name":"myBusinessCourse Resource Selection","id":20058,"favorite":false,"url":"https://mybusinesscourse.com/platform/local/integrations/lti.php","icon_url":"https://mybusinesscourse.com/ublish/client/cpb/images/link_logo.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003emyBusinessCourse LTI 1.3\u003c/p\u003e\n"},{"name":"Pearson Links","id":21056,"favorite":false,"url":"https://interop.pearson.com/launch","icon_url":"https://www.pearson.com/us/content/dam/one-dot-com/one-dot-com/us/en/images/PearsonThumbprint-RGB-127x138.png/_jcr_content/renditions/cq5dam.web.1600.9600.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eAccess Pearson\u003c/p\u003e\n"},{"name":"Embed Kaltura Media","id":25142,"favorite":true,"url":"https://1660902-6.kaf.kaltura.com","icon_url":"https://cdnsecakmi.kaltura.com/content/static/kalturalogo.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eTools for the UW-Madison Kaltura platform\u003c/p\u003e\n"},{"name":"Codio","id":25487,"favorite":false,"url":"https://apollo.codio.com/lti/ca4caca1-bb2b-4445-939f-95ec315f1bfe","icon_url":"https://static-assets.codio.com/dashboard/images/icons/favicon-16x16.da14ae918fd9bc3b.png","canvas_icon_class":null,"width":800,"height":400,"use_tray":false,"on_by_default":false,"description":"\u003cp\u003eCodio curriculum content and course authoring tools for Canvas LMS.\u003c/p\u003e\n"}]};
+    ENV = {"ASSET_HOST":"https://du11hjcvx0uqb.cloudfront.net","active_brand_config_json_url":"https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/cc220c0ff1277de99d472b6dc63ee650/variables-7dd4b80918af0e0218ec0229e4bd5873.json","active_brand_config":{"md5":"cc220c0ff1277de99d472b6dc63ee650","variables":{},"share":false,"name":null,"created_at":"2024-08-21T12:07:45-05:00","js_overrides":"https://instructure-uploads.s3.amazonaws.com/account_83960000000000001/attachments/27416442/MadisonCourseCatalog.js","css_overrides":"","mobile_js_overrides":"","mobile_css_overrides":"","parent_md5":"a221cd88c10853baedd6266e931b3841"},"confetti_branding_enabled":false,"url_to_what_gets_loaded_inside_the_tinymce_editor_css":["https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/cc220c0ff1277de99d472b6dc63ee650/variables-7dd4b80918af0e0218ec0229e4bd5873.css","https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_normal_contrast/bundles/what_gets_loaded_inside_the_tinymce_editor-90e5ad1077.css","https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/no_variables/bundles/fonts-6ee09b0b2f.css"],"url_for_high_contrast_tinymce_editor_css":["https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/default/variables-high_contrast-7dd4b80918af0e0218ec0229e4bd5873.css","https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/new_styles_high_contrast/bundles/what_gets_loaded_inside_the_tinymce_editor-795277483f.css","https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/no_variables/bundles/fonts-6ee09b0b2f.css"],"current_user_id":"210042","current_user_global_id":"83960000000210042","current_user_heap_id":"uu-2-b8e0df225888f508350f05f630b51a9475afbaccbb1f7ff370bb169fbe3d4d5d-0oZnoj0EXwmozuvldCGvsOXhduumpWAJplTCVyht","current_user_roles":["user","student"],"current_user_is_student":false,"current_user_types":[],"current_user_disabled_inbox":false,"current_user_visited_tabs":null,"discussions_reporting":true,"files_domain":"cluster77.canvas-user-content.com","group_information":null,"DOMAIN_ROOT_ACCOUNT_ID":"83960000000000001","DOMAIN_ROOT_ACCOUNT_UUID":"0oZnoj0EXwmozuvldCGvsOXhduumpWAJplTCVyht","k12":false,"help_link_name":"Help","help_link_icon":"help","use_high_contrast":false,"auto_show_cc":false,"disable_celebrations":false,"disable_keyboard_shortcuts":false,"LTI_LAUNCH_FRAME_ALLOWANCES":["geolocation *","microphone *","camera *","midi *","encrypted-media *","autoplay *","clipboard-write *","display-capture *"],"DEEP_LINKING_POST_MESSAGE_ORIGIN":"https://canvas.wisc.edu","comment_library_suggestions_enabled":false,"SETTINGS":{"open_registration":false,"collapse_global_nav":true,"release_notes_badge_disabled":false,"can_add_pronouns":true,"show_sections_in_course_tray":true,"filter_speed_grader_by_student_group":false},"RAILS_ENVIRONMENT":"Production","IN_PACED_COURSE":false,"SENTRY_FRONTEND":{"dsn":"https://355a1d96717e4038ac25aa852fa79a8f@relay-iad.sentry.insops.net/388","org_slug":"instructure","base_url":"https://sentry.insops.net","normalized_route":"/courses/{course_id}/assignments/{id}","errors_sample_rate":"0.005","traces_sample_rate":"0.005","url_deny_pattern":"instructure-uploads.*amazonaws.com","revision":"canvas-lms@20241106.291"},"DATA_COLLECTION_ENDPOINT":"https://canvas-frontend-data-iad-prod.inscloudgate.net/submit","DOMAIN_ROOT_ACCOUNT_SFID":"001A000000ZQLzgIAH","DIRECT_SHARE_ENABLED":false,"CAN_VIEW_CONTENT_SHARES":false,"FEATURES":{"featured_help_links":true,"account_level_blackout_dates":false,"render_both_to_do_lists":false,"commons_new_quizzes":false,"course_paces_redesign":true,"course_paces_for_students":true,"explicit_latex_typesetting":false,"media_links_use_attachment_id":true,"permanent_page_links":true,"selective_release_backend":true,"selective_release_ui_api":true,"selective_release_edit_page":true,"enhanced_course_creation_account_fetching":false,"instui_for_import_page":false,"multiselect_gradebook_filters":true,"assignment_edit_placement_not_on_announcements":false,"instui_header":false,"rce_find_replace":true,"courses_popout_sisid":true,"dashboard_graphql_integration":false,"discussion_checkpoints":false,"speedgrader_studio_media_capture":true,"disallow_threaded_replies_fix_alert":true,"product_tours":false,"usage_rights_discussion_topics":true,"granular_permissions_manage_users":true,"create_course_subaccount_picker":true,"file_verifiers_for_quiz_links":true,"lti_deep_linking_module_index_menu_modal":true,"lti_dynamic_registration":true,"lti_registrations_next":false,"lti_multiple_assignment_deep_linking":true,"lti_overwrite_user_url_input_select_content_dialog":true,"buttons_and_icons_root_account":false,"extended_submission_state":false,"scheduled_page_publication":true,"send_usage_metrics":true,"rce_transform_loaded_content":false,"mobile_offline_mode":false,"react_discussions_post":true,"instui_nav":false,"enhanced_developer_keys_tables":true,"lti_registrations_discover_page":false,"account_level_mastery_scales":false,"non_scoring_rubrics":true,"top_navigation_placement":false,"rubric_criterion_range":true,"lti_migration_info":true,"rce_lite_enabled_speedgrader_comments":true,"lti_toggle_placements":true,"login_registration_ui_identity":false,"lti_apps_page_instructors":false,"embedded_release_notes":true,"consolidated_media_player":false,"canvas_k6_theme":false,"new_math_equation_handling":true},"current_user":{"id":"210042","anonymous_id":"4i2i","display_name":"Yongzhi Lai","avatar_image_url":"https://secure.gravatar.com/avatar/95551abf218112ffe89ef388f1a51d23?s=128\u0026d=identicon","html_url":"https://canvas.wisc.edu/about/210042","pronouns":null,"avatar_is_fallback":false,"email":"LAI38@WISC.EDU"},"current_user_is_admin":false,"page_view_update_url":"/page_views/73a07caf-de02-42ee-93ac-a7f4600c433f?page_view_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpIjoiNzNhMDdjYWYtZGUwMi00MmVlLTkzYWMtYTdmNDYwMGM0MzNmIiwidSI6ODM5NjAwMDAwMDAyMTAwNDIsImMiOiIyMDI0LTExLTA5VDAxOjMxOjI0LjM3WiJ9.4GxW6xTKymP6E_d_HMCEqqY5Y8GIhIda4x72wa21TAA","context_asset_string":"course_176717","ping_url":"https://canvas.wisc.edu/api/v1/courses/176717/ping","TIMEZONE":"America/Chicago","CONTEXT_TIMEZONE":"America/Chicago","LOCALES":["en"],"BIGEASY_LOCALE":"en_US","FULLCALENDAR_LOCALE":"en","MOMENT_LOCALE":"en","rce_auto_save_max_age_ms":86400000,"K5_USER":false,"USE_CLASSIC_FONT":false,"K5_HOMEROOM_COURSE":false,"K5_SUBJECT_COURSE":false,"LOCALE_TRANSLATION_FILE":"/dist/javascripts/translations/en-67c25a6858.json","ACCOUNT_ID":"123","user_cache_key":"dHBhYkxONnRSMlIyazBpMVdoUXNQTUxPZFJINGYwa01HSjVSSG13enZ5Zlc9\nO1twLTA/OntQXz1IVXBncmFxZTtuamFsa2hwdm9pdWxraW1tYXFld2c=\n","current_context":{"id":"176717","name":"COMPSCI540: Introduction to Artificial Intelligence (001) SP20","type":"Course","url":"https://canvas.wisc.edu/courses/176717"},"ASSIGNMENT_POINTS_POSSIBLE":null,"media_comment_asset_string":"user_210042","COURSE_ID":"176717","ROOT_OUTCOME_GROUP":{"id":"85329","title":"COMPSCI540: Introduction to Artificial Intelligence (001) SP20","vendor_guid":null,"url":"/api/v1/courses/176717/outcome_groups/85329","subgroups_url":"/api/v1/courses/176717/outcome_groups/85329/subgroups","outcomes_url":"/api/v1/courses/176717/outcome_groups/85329/outcomes","can_edit":false,"import_url":"/api/v1/courses/176717/outcome_groups/85329/import","context_id":"176717","context_type":"Course","description":null},"SUBMISSION_ID":"43843044","FIRST_ANNOTATION_SUBMISSION":false,"RICH_CONTENT_APP_HOST":"rich-content-iad.inscloudgate.net","JWT":"ZXlKaGJHY2lPaUprYVhJaUxDSmxibU1pT2lKQk1qVTJSME5OSWl3aWNtVm5hVzl1SWpvaWRYTXRaV0Z6ZEMweElpd2laVzUyYVhKdmJtMWxiblFpT2lKUWNtOWtkV04wYVc5dUluMC4uaHR6Rk9zZEJ5amZ4R0NjNy5ROVYxVVBFeW9vT1dKSTBKSThFRTJaYTJxclVFdkVmd1YxSTVwVG1OaWxsM2N2ajY1dmRXMlc0UVYwTUFkVFQxX0hJUXpPSHJPUXRxZ3RHUFRUSkFyS1lJUG5hS1pkd3JacHdWYy1FYk1lVzFxcjFoTkNJV2dvUEpJSjlUUzlzVGliUC0wRzVRX25MTTJWcU8xbVhld2lVWDlqS18yZFVJaHpGMWYzM1dhTWlRbm9jSHlYU1FTZk1FVUdxTHQyZF9fWDV1UWRVbHdHeWtWbGs3ekcwUHRfOVY4MWpMV19mTlByaVlqSUhHV2tSTzRnLU1qNDBfa2dnb09mUy16Ym1acER4TEdZTG1Bb1JaN1NJSnJuNG13UE53MXFFZGlLYmM0SUZVZkJINFNRNy1mdkk4cjk4Z2x6ejRHRDhCa2tmUDZOYWpWdDZLdzM3WlNsSEtoZWd0RzRpQ3hrMDhRdG1rLTMxdFdBczRhOC1MX2ZPcWl6VmtLZUZKTDFiajhnTDJfS3Z0d2lIaTVvXzFOQk5DRmpIODJkTFkwd25KUnJRQVNsc1doZHlxQTltSWUxRWdvSVhrcC1GUnVaWHJJNXhEazNWYlBDcHdsMmRtX05PY194cDdaNTIwT2NIZDRTOTRNeEZOQ05rUjNRZm02RG9mMnpMX3ZTVFZhSGh3d3pINzF2NGl3di1hR09IdnlEdDc0MWlibWJCQS1LUmVFeGVVWHZJMUxTdWozbUE5cVNjZWpwRjVJdVNaUXVuOVdSTV9Oc3hONUdvRzRfMk41aXIyRnhCSjNqN3pBa0h3WGFQTjZrZXg1b2lJR0YxQVA4TkdMM2xTYXJsd01velUzWENwVXlxMkVWTGp3ZHdaTnVRZ3Bidnp2ZHNKWWZFRjhYYnNleWIxamMzdlRHSnN6SE9pNm1scGRRXzVoVUFoTThOQ3hneUNiRnZncFpDbUxyTFVnX1Z3ajA4bXpvMnp6U3RiZjlnRGtTczc1Ujk4Z2piTlJKM0o2Q0s0OGF2VGRPRmxpNnJYYnd5X01XTkNaWUJTYVM5c2VvRWRNOG9ib2dIVVlDVC1RNi1SVE1hR1FoZC0xS1BQZjE2ZnJXOGFOd011SXhqXy4tU00zTmI5VzF3MlR3RzNtZkNfdnNn","RICH_CONTENT_CAN_UPLOAD_FILES":false,"RICH_CONTENT_CAN_EDIT_FILES":false,"RICH_CONTENT_FILES_TAB_DISABLED":true,"RICH_CONTENT_INST_RECORD_TAB_DISABLED":false,"RICH_CONTENT_AI_TEXT_TOOLS":false,"ASSIGNMENT_ID":"807809","PREREQS":{},"EULA_URL":null,"EXTERNAL_TOOLS":[{"id":"691","domain":"edu-apps.org","url":"https://www.edu-apps.org/box/","consumer_key":"f0c24720-f77b-45fc-9e3a-285663c9a9d7","name":"BOX","description":"Embed files from Box","created_at":"2017-07-31T08:22:29-05:00","updated_at":"2017-07-31T08:22:53-05:00","privacy_level":"anonymous","custom_fields":{},"workflow_state":"anonymous","vendor_help_link":null,"account_navigation":null,"analytics_hub":null,"assignment_edit":null,"assignment_group_menu":null,"assignment_index_menu":null,"assignment_menu":null,"assignment_selection":null,"assignment_view":null,"collaboration":null,"course_assignments_menu":null,"course_home_sub_navigation":null,"course_navigation":{"enabled":"true","default":"disabled","visibility":"public","label":"BOX","selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png"},"course_settings_sub_navigation":null,"discussion_topic_index_menu":null,"discussion_topic_menu":null,"file_index_menu":null,"file_menu":null,"global_navigation":null,"homework_submission":{"enabled":"true","label":"BOX","selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png"},"link_selection":null,"migration_selection":null,"module_group_menu":null,"module_index_menu":null,"module_index_menu_modal":null,"module_menu_modal":null,"module_menu":null,"post_grades":null,"quiz_index_menu":null,"quiz_menu":null,"resource_selection":{"enabled":"true","label":"BOX","selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png"},"similarity_detection":null,"student_context_card":null,"submission_type_selection":null,"tool_configuration":null,"top_navigation":null,"user_navigation":{"enabled":"true","visibility":"public","label":"BOX","selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png"},"wiki_index_menu":null,"wiki_page_menu":null,"editor_button":{"enabled":"true","label":"BOX","selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png"},"is_rce_favorite":false,"selection_width":430,"selection_height":200,"icon_url":"https://www.edu-apps.org/assets/lti_box_engine/icon.png","not_selectable":false,"version":"1.1","unified_tool_id":"88e9a5d8-1663-46d5-9d2d-7fb1db475c93","deployment_id":"691:f39913480cdd695e6f983b96ae1b66d1134205d9"},{"id":"354","domain":"google-drive-lti-iad-prod.instructure.com","url":"https://google-drive-lti-iad-prod.instructure.com/lti/course-navigation","consumer_key":"8fc78ac7-010f-4e61-9f03-6eaea4f1930f","name":"GoogleApps","description":"\nAllows you to pull in documents from Google Drive to Canvas\n","created_at":"2017-02-10T11:19:22-06:00","updated_at":"2020-09-11T18:43:57-05:00","privacy_level":"name_only","custom_fields":{"account_id":"$Canvas.account.id","assignment_title":"$Canvas.assignment.title","base_url":"$Canvas.api.baseUrl","collaboration_members_url":"$Canvas.api.collaborationMembers.url","domain":"$Canvas.api.domain","group_context_ids":"$Canvas.group.contextIds","masquerading_user_id":"$Canvas.masqueradingUser.userId","membership_service_url":"$ToolProxyBinding.memberships.url","time_zone":"$Person.address.timezone","user_id":"$Canvas.user.id","previous_context_ids":"$Canvas.course.previousContextIds"},"workflow_state":"name_only","vendor_help_link":null,"account_navigation":null,"analytics_hub":null,"assignment_edit":null,"assignment_group_menu":null,"assignment_index_menu":null,"assignment_menu":null,"assignment_selection":{"enabled":true,"message_type":"ContentItemSelectionRequest","text":"Google Docs Cloud Assignment","url":"https://google-drive-lti-iad-prod.instructure.com/lti/cloud-template-selection","label":"Google Docs Cloud Assignment","selection_width":800,"selection_height":400},"assignment_view":null,"collaboration":{"enabled":true,"canvas_icon_class":"icon-lti","icon_url":"https://google-drive-lti-iad-prod.instructure.com/assets/google_drive_icon-ba12a17e3e3d7f70f910b17f1b4c0500ff0298ad087a93a6c133ca623c40f0f8.png","message_type":"ContentItemSelectionRequest","text":"Google Drive","url":"https://google-drive-lti-iad-prod.instructure.com/lti/collaboration-content-selection","label":"Google Drive","selection_width":800,"selection_height":400},"course_assignments_menu":null,"course_home_sub_navigation":null,"course_navigation":{"enabled":true,"text":"Google Drive","url":"https://google-drive-lti-iad-prod.instructure.com/lti/course-navigation","default":"disabled","label":"Google Drive","selection_width":800,"selection_height":400},"course_settings_sub_navigation":null,"discussion_topic_index_menu":null,"discussion_topic_menu":null,"file_index_menu":null,"file_menu":null,"global_navigation":null,"homework_submission":{"enabled":true,"canvas_icon_class":"icon-lti","icon_url":"https://google-drive-lti-iad-prod.instructure.com/assets/google_drive_icon-ba12a17e3e3d7f70f910b17f1b4c0500ff0298ad087a93a6c133ca623c40f0f8.png","message_type":"ContentItemSelectionRequest","text":"Google Drive","url":"https://google-drive-lti-iad-prod.instructure.com/lti/homework-content-selection","label":"Google Drive","selection_width":800,"selection_height":400},"link_selection":{"enabled":"true","message_type":"ContentItemSelectionRequest","selection_height":600,"selection_width":700,"text":"Google Drive","url":"https://google-drive-lti-iad-prod.instructure.com/lti/module-content-selection","label":"Google Drive"},"migration_selection":null,"module_group_menu":null,"module_index_menu":null,"module_index_menu_modal":null,"module_menu_modal":null,"module_menu":null,"post_grades":null,"quiz_index_menu":null,"quiz_menu":null,"resource_selection":null,"similarity_detection":null,"student_context_card":null,"submission_type_selection":null,"tool_configuration":null,"top_navigation":null,"user_navigation":null,"wiki_index_menu":null,"wiki_page_menu":null,"editor_button":{"enabled":true,"icon_url":"https://google-drive-lti-iad-prod.instructure.com/icon.png","message_type":"ContentItemSelectionRequest","selection_height":600,"selection_width":700,"url":"https://google-drive-lti-iad-prod.instructure.com/lti/rce-content-selection","label":"GoogleApps"},"is_rce_favorite":false,"icon_url":"\nhttps://google-drive-lti-iad-prod.instructure.com/assets/google_drive_icon-ba12a17e3e3d7f70f910b17f1b4c0500ff0298ad087a93a6c133ca623c40f0f8.png\n","not_selectable":false,"version":"1.1","unified_tool_id":"36a41d47-a87f-4036-afb8-bcef0631bad8","deployment_id":"354:f39913480cdd695e6f983b96ae1b66d1134205d9"},{"id":"690","domain":"office365-iad-prod.instructure.com","url":"https://office365-iad-prod.instructure.com/lti/course-navigation","consumer_key":"6e338f98-9a73-4d23-af9e-1ef347f9e2fc","name":"Office 365","description":"\nAllows you to pull in documents from Office 365 to Canvas\n","created_at":"2017-07-31T07:20:12-05:00","updated_at":"2018-03-20T16:58:27-05:00","privacy_level":"name_only","custom_fields":{"account_id":"$Canvas.account.id","assignment_title":"$Canvas.assignment.title","base_url":"$Canvas.api.baseUrl","collaboration_members_url":"$Canvas.api.collaborationMembers.url","course_id":"$Canvas.course.id","domain":"$Canvas.api.domain","group_context_ids":"$Canvas.group.contextIds","masquerading_user_id":"$Canvas.masqueradingUser.userId","membership_service_url":"$ToolProxyBinding.memberships.url","time_zone":"$Person.address.timezone","user_id":"$Canvas.user.id","previous_context_ids":"$Canvas.course.previousContextIds","previous_context_ids_recursive":"$Canvas.course.previousContextIds.recursive"},"workflow_state":"name_only","vendor_help_link":null,"account_navigation":null,"analytics_hub":null,"assignment_edit":null,"assignment_group_menu":null,"assignment_index_menu":null,"assignment_menu":null,"assignment_selection":{"enabled":true,"message_type":"ContentItemSelectionRequest","text":"Office 365 Cloud Assignment","url":"https://office365-iad-prod.instructure.com/lti/cloud-assignment-template","label":"Office 365 Cloud Assignment","selection_width":800,"selection_height":400},"assignment_view":null,"collaboration":{"enabled":true,"canvas_icon_class":"icon-lti","icon_url":"https://office365-iad-prod.instructure.com/images/office365_icon.png","message_type":"ContentItemSelectionRequest","text":"Office 365","url":"https://office365-iad-prod.instructure.com/lti/collaboration-content-item","label":"Office 365","selection_width":800,"selection_height":400},"course_assignments_menu":null,"course_home_sub_navigation":null,"course_navigation":{"enabled":"true","default":"disabled","text":"Office 365","url":"https://office365-iad-prod.instructure.com/lti/course-navigation","label":"Office 365","selection_width":800,"selection_height":400},"course_settings_sub_navigation":null,"discussion_topic_index_menu":null,"discussion_topic_menu":null,"file_index_menu":null,"file_menu":null,"global_navigation":null,"homework_submission":{"enabled":true,"canvas_icon_class":"icon-lti","icon_url":"https://office365-iad-prod.instructure.com/images/office365_icon.png","message_type":"ContentItemSelectionRequest","text":"Office 365","url":"https://office365-iad-prod.instructure.com/lti/homework-submission-content-item","label":"Office 365","selection_width":800,"selection_height":400},"link_selection":{"enabled":"true","message_type":"ContentItemSelectionRequest","selection_height":600,"selection_width":900,"text":"Office 365","url":"https://office365-iad-prod.instructure.com/lti/module-content-item","label":"Office 365"},"migration_selection":null,"module_group_menu":null,"module_index_menu":null,"module_index_menu_modal":null,"module_menu_modal":null,"module_menu":null,"post_grades":null,"quiz_index_menu":null,"quiz_menu":null,"resource_selection":null,"similarity_detection":null,"student_context_card":null,"submission_type_selection":null,"tool_configuration":null,"top_navigation":null,"user_navigation":null,"wiki_index_menu":null,"wiki_page_menu":null,"editor_button":{"enabled":true,"icon_url":"https://office365-iad-prod.instructure.com/images/office365_icon.png","message_type":"ContentItemSelectionRequest","selection_height":600,"selection_width":900,"url":"https://office365-iad-prod.instructure.com/lti/rce-content-item","label":"Office 365"},"is_rce_favorite":false,"icon_url":"\nhttps://office365-iad-prod.instructure.com/images/office365_icon.png\n","not_selectable":false,"version":"1.1","unified_tool_id":"a708e32e-99b1-4acc-8742-7ce9d9f8f78f","deployment_id":"690:f39913480cdd695e6f983b96ae1b66d1134205d9"}],"PERMISSIONS":{"context":{"read_as_admin":false,"manage_assignments":false,"manage_assignments_edit":false},"assignment":{"update":false,"submit":false},"can_manage_groups":false,"manage_rubrics":false},"SIMILARITY_PLEDGE":null,"CONFETTI_ENABLED":false,"EMOJIS_ENABLED":false,"EMOJI_DENY_LIST":null,"USER_ASSET_STRING":"user_210042","OUTCOMES_NEW_DECAYING_AVERAGE_CALCULATION":true,"assigned_rubric":null,"rubric_association":null,"CONDITIONAL_RELEASE_SERVICE_ENABLED":true,"CONDITIONAL_RELEASE_ENV":{"course_id":"176717","stats_url":"/api/v1/courses/176717/mastery_paths/stats","rule":null},"badge_counts":{"submissions":0},"notices":[],"active_context_tab":"assignments"};
+    BRANDABLE_CSS_HANDLEBARS_INDEX = [["new_styles_normal_contrast","new_styles_high_contrast","new_styles_normal_contrast_rtl","new_styles_high_contrast_rtl"],{"10":["908ffbc673",0,"d5c9044c6e",2],"15":["c8540c43a4",0,"0a2196be1d",2],"19":["df5777ed9c"],"61":["b8f6d0d1fa","c3396c44a9","cfc0690334","1c0f3762fa"],"67":["700335fb7b",0,"1cc2485e2c",2],"71":["8ac0336ef0","bf3093677a","a8146a011b","449171073f"],"06":["ba28819778",0,"96b99aafe5",2],"f0":["b349f31f5e",0,0,0],"c8":["718c8509f5","33cd4c40e3","03d0fbcbe8","ec23096f0d"],"1e":["6eb4ecac8e","4100cb65ce","0faf4716c8","bed54fd75e"],"b3":["e5da23fb43","0911fc8ed3","05b2bb5a6f","ba2585de5c"],"0c":["4dae5befd2",0,"c18876be89",2],"da":["b5a7f9cd8f","a4e5066985","773390ae11","8e9071910c"],"1d":["2128789890",0,"e568085637",2],"08":["64bff5a97d"],"e2":["11429f119a"],"9f":["d39b291ba6",0,0,0],"2b":["c491abf31e","b11dc54da6","b58622671f","6bb4a7ae9e"],"2c":["8a926fc28b",0,0,0],"c2":["6f2721ae01"],"9c":["c31821c764",0,"1693aba1da",2],"c5":["44c6024769","31150a4a27","53dd277fa9","5fe61c91c2"],"f2":["51574f9b13"]}]
+    REMOTES = {};
+  </script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/brandable_css/cc220c0ff1277de99d472b6dc63ee650/variables-7dd4b80918af0e0218ec0229e4bd5873.js" defer="defer"></script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/timezone/America/Chicago-d9fecf4265.js" defer="defer"></script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/timezone/America/Chicago-d9fecf4265.js" defer="defer"></script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/timezone/en_US-80a0ce259b.js" defer="defer"></script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/webpack-production/react-entry-ee6302752258bee2.js" crossorigin="anonymous" defer="defer"></script>
+  <script src="https://du11hjcvx0uqb.cloudfront.net/dist/webpack-production/main-entry-4cf7c2a2e6d4e0ae.js" crossorigin="anonymous" defer="defer"></script>
+<script>
+//<![CDATA[
+(window.bundles || (window.bundles = [])).push('assignment_show');
+(window.bundles || (window.bundles = [])).push('edit_rubric');
+(window.bundles || (window.bundles = [])).push('navigation_header');
+//]]>
+</script>
+  
+  <script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-"+e+".js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};
+    heap.load("3001039959");
+    heap.clearEventProperties();
+    heap.addEventProperties({'Base.appName': 'Canvas'});
+    setTimeout(() => {
+      if (ENV.current_user_heap_id && ENV.current_user_heap_id !== heap.identity) {
+        heap.identify(ENV.current_user_heap_id);
+      }
+      props = {}
+      if (ENV.current_user_roles) {
+        props['role'] = ENV.current_user_roles[ENV.current_user_roles.length - 1]
+      }
+      if (ENV.DOMAIN_ROOT_ACCOUNT_UUID) {
+        props['Canvas.accountId'] = ENV.DOMAIN_ROOT_ACCOUNT_UUID
+      }
+      if (ENV.DOMAIN_ROOT_ACCOUNT_SFID) {
+        props['Canvas.salesforceAccountId'] = ENV.DOMAIN_ROOT_ACCOUNT_SFID
+      }
+      if (Object.keys(props).length > 0) {
+        heap.addUserProperties(props);
+      }
+    }, 1000);
+  </script>
+</head>
+
+<body class="with-left-side course-menu-expanded with-right-side assignments primary-nav-transitions full-width context-course_176717 responsive_student_grades_page">
+
+<noscript>
+  <div role="alert" class="ic-flash-static ic-flash-error">
+    <div class="ic-flash__icon" aria-hidden="true">
+      <i class="icon-warning"></i>
+    </div>
+    <h1>You need to have JavaScript enabled in order to access this site.</h1>
+  </div>
+</noscript>
+
+
+
+
+<div id="flash_message_holder"></div>
+<div id="flash_screenreader_holder"></div>
+
+<div id="application" class="ic-app">
+  
+
+
+
+
+<header id="mobile-header" class="no-print">
+  <button type="button" class="Button Button--icon-action-rev Button--large mobile-header-hamburger">
+    <i class="icon-solid icon-hamburger"></i>
+    <span id="mobileHeaderInboxUnreadBadge" class="menu-item__badge" style="min-width: 0; top: 12px; height: 12px; right: 6px; display:none;"></span>
+    <span class="screenreader-only">Dashboard</span>
+  </button>
+  <div class="mobile-header-space"></div>
+    <a class="mobile-header-title expandable" href="/courses/176717" role="button" aria-controls="mobileContextNavContainer">
+      <div>SP20 COMPSCI 540 001</div>
+        <div>P8: Ice Cover Regression</div>
+    </a>
+    <div class="mobile-header-space"></div>
+    <button type="button" class="Button Button--icon-action-rev Button--large mobile-header-arrow" aria-label="Navigation Menu">
+      <i class="icon-arrow-open-down" id="mobileHeaderArrowIcon"></i>
+    </button>
+</header>
+<nav id="mobileContextNavContainer"></nav>
+
+<header id="header" class="ic-app-header no-print ">
+  <a href="#content" id="skip_navigation_link">Skip To Content</a>
+  <div role="region" class="ic-app-header__main-navigation" aria-label="Global Navigation">
+      <div class="ic-app-header__logomark-container">
+        <a href="https://canvas.wisc.edu/" class="ic-app-header__logomark">
+          <span class="screenreader-only">Dashboard</span>
+        </a>
+      </div>
+    <ul id="menu" class="ic-app-header__menu-list">
+        <li class="menu-item ic-app-header__menu-list-item ">
+          <a id="global_nav_profile_link" role="button" href="/profile/settings" class="ic-app-header__menu-list-link">
+            <div class="menu-item-icon-container">
+              <div aria-hidden="true" class="fs-exclude ic-avatar ">
+                <img src="https://secure.gravatar.com/avatar/95551abf218112ffe89ef388f1a51d23?s=128&amp;d=identicon" alt="Yongzhi Lai" />
+              </div>
+              <span class="menu-item__badge"></span>
+            </div>
+            <div class="menu-item__text">
+              Account
+            </div>
+          </a>
+        </li>
+      <li class="ic-app-header__menu-list-item ">
+        <a id="global_nav_dashboard_link" href="https://canvas.wisc.edu/" class="ic-app-header__menu-list-link">
+          <div class="menu-item-icon-container" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--dashboard" version="1.1" x="0" y="0" viewBox="0 0 280 200" enable-background="new 0 0 280 200" xml:space="preserve"><path d="M273.09,180.75H197.47V164.47h62.62A122.16,122.16,0,1,0,17.85,142a124,124,0,0,0,2,22.51H90.18v16.29H6.89l-1.5-6.22A138.51,138.51,0,0,1,1.57,142C1.57,65.64,63.67,3.53,140,3.53S278.43,65.64,278.43,142a137.67,137.67,0,0,1-3.84,32.57ZM66.49,87.63,50.24,71.38,61.75,59.86,78,76.12Zm147,0L202,76.12l16.25-16.25,11.51,11.51ZM131.85,53.82v-23h16.29v23Zm15.63,142.3a31.71,31.71,0,0,1-28-16.81c-6.4-12.08-15.73-72.29-17.54-84.25a8.15,8.15,0,0,1,13.58-7.2c8.88,8.21,53.48,49.72,59.88,61.81a31.61,31.61,0,0,1-27.9,46.45ZM121.81,116.2c4.17,24.56,9.23,50.21,12,55.49A15.35,15.35,0,1,0,161,157.3C158.18,152,139.79,133.44,121.81,116.2Z" /></svg>
+
+          </div>
+          <div class="menu-item__text">
+            Dashboard
+          </div>
+        </a>
+      </li>
+        <li class="menu-item ic-app-header__menu-list-item ic-app-header__menu-list-item--active">
+          <a id="global_nav_courses_link" role="button" href="/courses" class="ic-app-header__menu-list-link">
+            <div class="menu-item-icon-container" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--courses" version="1.1" x="0" y="0" viewBox="0 0 280 259" enable-background="new 0 0 280 259" xml:space="preserve"><path d="M73.31,198c-11.93,0-22.22,8-24,18.73a26.67,26.67,0,0,0-.3,3.63v.3a22,22,0,0,0,5.44,14.65,22.47,22.47,0,0,0,17.22,8H200V228.19h-134V213.08H200V198Zm21-105.74h90.64V62H94.3ZM79.19,107.34V46.92H200v60.42Zm7.55,30.21V122.45H192.49v15.11ZM71.65,16.71A22.72,22.72,0,0,0,49,39.36V190.88a41.12,41.12,0,0,1,24.32-8h157V16.71ZM33.88,39.36A37.78,37.78,0,0,1,71.65,1.6H245.36V198H215.15v45.32h22.66V258.4H71.65a37.85,37.85,0,0,1-37.76-37.76Z"/></svg>
+
+            </div>
+            <div class="menu-item__text">
+              Courses
+            </div>
+          </a>
+        </li>
+      <li class="menu-item ic-app-header__menu-list-item ">
+        <a id="global_nav_calendar_link" href="/calendar" class="ic-app-header__menu-list-link">
+          <div class="menu-item-icon-container" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--calendar" version="1.1" x="0" y="0" viewBox="0 0 280 280" enable-background="new 0 0 280 280" xml:space="preserve"><path d="M197.07,213.38h16.31V197.07H197.07Zm-16.31,16.31V180.76h48.92v48.92Zm-48.92-16.31h16.31V197.07H131.85Zm-16.31,16.31V180.76h48.92v48.92ZM66.62,213.38H82.93V197.07H66.62ZM50.32,229.68V180.76H99.24v48.92Zm146.75-81.53h16.31V131.85H197.07Zm-16.31,16.31V115.54h48.92v48.92Zm-48.92-16.31h16.31V131.85H131.85Zm-16.31,16.31V115.54h48.92v48.92ZM66.62,148.15H82.93V131.85H66.62ZM50.32,164.46V115.54H99.24v48.92ZM34,262.29H246V82.93H34ZM246,66.62V42.16A8.17,8.17,0,0,0,237.84,34H213.38v8.15a8.15,8.15,0,1,1-16.31,0V34H82.93v8.15a8.15,8.15,0,0,1-16.31,0V34H42.16A8.17,8.17,0,0,0,34,42.16V66.62Zm-8.15-48.92a24.49,24.49,0,0,1,24.46,24.46V278.6H17.71V42.16A24.49,24.49,0,0,1,42.16,17.71H66.62V9.55a8.15,8.15,0,0,1,16.31,0v8.15H197.07V9.55a8.15,8.15,0,1,1,16.31,0v8.15Z"/></svg>
+
+          </div>
+          <div class="menu-item__text">
+            Calendar
+          </div>
+        </a>
+      </li>
+      <li class="menu-item ic-app-header__menu-list-item ">
+      <!-- TODO: Add back global search when available -->
+        <a id="global_nav_conversations_link" href="/conversations" class="ic-app-header__menu-list-link">
+          <div class="menu-item-icon-container">
+            <span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--inbox" version="1.1" x="0" y="0" viewBox="0 0 280 280" enable-background="new 0 0 280 280" xml:space="preserve"><path d="M91.72,120.75h96.56V104.65H91.72Zm0,48.28h80.47V152.94H91.72Zm0-96.56h80.47V56.37H91.72Zm160.94,34.88H228.52V10.78h-177v96.56H27.34A24.17,24.17,0,0,0,3.2,131.48V244.14a24.17,24.17,0,0,0,24.14,24.14H252.66a24.17,24.17,0,0,0,24.14-24.14V131.48A24.17,24.17,0,0,0,252.66,107.34Zm0,16.09a8.06,8.06,0,0,1,8,8v51.77l-32.19,19.31V123.44ZM67.58,203.91v-177H212.42v177ZM27.34,123.44H51.48v79.13L19.29,183.26V131.48A8.06,8.06,0,0,1,27.34,123.44ZM252.66,252.19H27.34a8.06,8.06,0,0,1-8-8V202l30,18H230.75l30-18v42.12A8.06,8.06,0,0,1,252.66,252.19Z"/></svg>
+</span>
+            <span class="menu-item__badge"></span>
+          </div>
+          <div class="menu-item__text">
+            Inbox
+          </div>
+        </a>
+      </li>
+        <li class="menu-item ic-app-header__menu-list-item" >
+          <a id="global_nav_history_link" role="button" href="#" class="ic-app-header__menu-list-link">
+            <div class="menu-item-icon-container" aria-hidden="true">
+              <svg viewBox="0 0 1920 1920" class="ic-icon-svg menu-item__icon svg-icon-history" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M960 112.941c-467.125 0-847.059 379.934-847.059 847.059 0 467.125 379.934 847.059 847.059 847.059 467.125 0 847.059-379.934 847.059-847.059 0-467.125-379.934-847.059-847.059-847.059M960 1920C430.645 1920 0 1489.355 0 960S430.645 0 960 0s960 430.645 960 960-430.645 960-960 960m417.905-575.955L903.552 988.28V395.34h112.941v536.47l429.177 321.77-67.765 90.465z" stroke="none" stroke-width="1" fill-rule="evenodd"/>
+</svg>
+            </div>
+            <div class="menu-item__text">
+              History
+            </div>
+          </a>
+        </li>
+        
+
+      <li class="ic-app-header__menu-list-item">
+        <a id="global_nav_help_link" role="button" class="ic-app-header__menu-list-link" data-track-category="help system" data-track-label="help button" href="https://help.instructure.com">
+          <div class="menu-item-icon-container" role="presentation">
+              <svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg menu-item__icon svg-icon-help" version="1.1" x="0" y="0" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" fill="currentColor"><path d="M100,127.88A11.15,11.15,0,1,0,111.16,139,11.16,11.16,0,0,0,100,127.88Zm8.82-88.08a33.19,33.19,0,0,1,23.5,23.5,33.54,33.54,0,0,1-24,41.23,3.4,3.4,0,0,0-2.74,3.15v9.06H94.42v-9.06a14.57,14.57,0,0,1,11.13-14,22.43,22.43,0,0,0,13.66-10.27,22.73,22.73,0,0,0,2.31-17.37A21.92,21.92,0,0,0,106,50.59a22.67,22.67,0,0,0-19.68,3.88,22.18,22.18,0,0,0-8.65,17.64H66.54a33.25,33.25,0,0,1,13-26.47A33.72,33.72,0,0,1,108.82,39.8ZM100,5.2A94.8,94.8,0,1,0,194.8,100,94.91,94.91,0,0,0,100,5.2m0,178.45A83.65,83.65,0,1,1,183.65,100,83.73,83.73,0,0,1,100,183.65" transform="translate(-5.2 -5.2)"/></svg>
+
+            <span class="menu-item__badge"></span>
+          </div>
+          <div class="menu-item__text">
+            Help
+          </div>
+</a>      </li>
+    </ul>
+  </div>
+  <div class="ic-app-header__secondary-navigation">
+    <ul class="ic-app-header__menu-list">
+      <li class="menu-item ic-app-header__menu-list-item">
+        <a
+          id="primaryNavToggle"
+          role="button"
+          href="#"
+          class="ic-app-header__menu-list-link ic-app-header__menu-list-link--nav-toggle"
+          aria-label="Expand global navigation
+                "
+          title="Expand global navigation
+                "
+        >
+          <div class="menu-item-icon-container" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ic-icon-svg ic-icon-svg--navtoggle" version="1.1" x="0" y="0" width="40" height="32" viewBox="0 0 40 32" xml:space="preserve">
+  <path d="M39.5,30.28V2.48H37.18v27.8Zm-4.93-13.9L22.17,4,20.53,5.61l9.61,9.61H.5v2.31H30.14l-9.61,9.61,1.64,1.64Z"/>
+</svg>
+
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div id="global_nav_tray_container"></div>
+  <div id="global_nav_tour"></div>
+</header>
+
+
+  <div id="instructure_ajax_error_box">
+    <div style="text-align: right; background-color: #fff;"><a href="#" class="close_instructure_ajax_error_box_link">Close</a></div>
+    <iframe id="instructure_ajax_error_result" src="about:blank" style="border: 0;" title="Error"></iframe>
+  </div>
+
+  <div id="wrapper" class="ic-Layout-wrapper">
+        <div class="ic-app-nav-toggle-and-crumbs no-print">
+            <button type="button" id="courseMenuToggle" class="Button Button--link ic-app-course-nav-toggle" aria-live="polite" aria-label="Hide Courses Navigation Menu">
+              <i class="icon-hamburger" aria-hidden="true"></i>
+            </button>
+
+          <div class="ic-app-crumbs ">
+              <nav id="breadcrumbs" role="navigation" aria-label="breadcrumbs"><ul><li class="home"><a href="/"><span class="ellipsible"><i class="icon-home"
+   title="My Dashboard">
+  <span class="screenreader-only">My Dashboard</span>
+</i>
+</span></a></li><li><a href="/courses/176717"><span class="ellipsible">SP20 COMPSCI 540 001</span></a></li><li><a href="/courses/176717/assignments"><span class="ellipsible">Assignments</span></a></li><li><a href="https://canvas.wisc.edu/courses/176717/assignments/807809"><span class="ellipsible">P8: Ice Cover Regression</span></a></li></ul></nav>
+          </div>
+
+
+          <div class="right-of-crumbs">
+              <div class="TutorialToggleHolder"></div>
+          </div>
+
+        </div>
+    <div id="main" class="ic-Layout-columns">
+        <div class="ic-Layout-watermark"></div>
+        <div id="left-side"
+          class="ic-app-course-menu ic-sticky-on list-view"
+          style="display: block"
+          >
+          <div id="sticky-container" class="ic-sticky-frame">
+              <span id="section-tabs-header-subtitle" class="ellipsis">Spring 2019-2020</span>
+            <nav role="navigation" aria-label="Courses Navigation Menu"><ul id="section-tabs"><li class="section"><a href="/courses/176717" class="home">Home</a></li><li class="section"><a href="/courses/176717/announcements" class="announcements">Announcements</a></li><li class="section"><a href="/courses/176717/assignments" aria-current="page" class="assignments active">Assignments</a></li><li class="section"><a href="/courses/176717/grades" class="grades">Grades</a></li><li class="section"><a href="/courses/176717/wiki" class="pages">Pages</a></li><li class="section"><a href="/courses/176717/assignments/syllabus" class="syllabus">Syllabus</a></li><li class="section"><a href="/courses/176717/external_tools/14065" class="context_external_tool_14065">Zoom</a></li><li class="section"><a href="/courses/176717/external_tools/14796" class="context_external_tool_14796">Library Dashboard</a></li><li class="section"><a href="/courses/176717/external_tools/18678" class="context_external_tool_18678">Top Hat</a></li><li class="section"><a href="/courses/176717/external_tools/21691" class="context_external_tool_21691">NameCoach Roster</a></li><li class="section"><a href="/courses/176717/external_tools/25142" class="context_external_tool_25142">Kaltura Gallery</a></li></ul></nav>
+          </div>
+        </div>
+      <div id="not_right_side" class="ic-app-main-content">
+        <div id="content-wrapper" class="ic-Layout-contentWrapper">
+          
+          <div id="content" class="ic-Layout-contentMain" role="main">
+            
+<style>
+  #right-side-wrapper {
+    height: 100%;
+  }
+
+  .assignment_header {
+    border-bottom: 1px solid #a4a4a4;
+    overflow: hidden;
+  }
+
+  #assignment_head {
+    margin-top: 0;
+    font-weight: bold;
+  }
+
+  .lock_explanation {
+    text-align: left;
+    margin-top: 20px;
+  }
+</style>
+
+
+
+<div id="assignment_show" class="assignment content_underline_links" data-lti-page-content="true">
+    <!--Student View-->
+    <div class='assignment-title'>
+      <div class='title-content'>
+        <h1 class="title">
+          P8: Ice Cover Regression
+        </h1>
+      </div>
+      <div class='assignment-buttons'>
+        
+
+        
+      </div>
+    </div>
+    
+<ul class='student-assignment-overview'>
+  <li>
+    <span class='title'>Due</span>
+    <span class='value'>
+          <span class="date_text">
+                <span class="display_date">Apr 16, 2020</span> by 
+                <span class="display_time">9:29am</span>
+          </span><!--
+        --></span>
+  </li>
+    <li>
+      <span class='title'>Points</span>
+      <span class='value'>100</span>
+    </li>
+    <li>
+      <span class='title'>Submitting</span>
+      <span class='value'>a file upload</span>
+    </li>
+      <li>
+        <span class='title'>File Types</span>
+        <span class='value'>py, txt, csv, and zip</span>
+      </li>
+  
+  <li>
+    <span class="title">Available</span>
+    <span class="value">
+        Apr 9, 2020 at 9:30am - Apr 16, 2020 at 9:29am
+    </span>
+  </li>
+
+  <div class="clear"></div>
+</ul>
+
+  <div class="clear"></div>
+
+    This assignment was locked Apr 16, 2020 at 9:29am.
+
+  <div class="clear"></div>
+
+
+
+
+  <div class="description user_content " data-resource-type="assignment.body" data-resource-id=807809><h2>Assignment Goals</h2>
+<ul>
+<li>Implement a linear regression calculation</li>
+<li>Examine the trends in real (messy) data</li>
+</ul>
+<h2>Summary</h2>
+<p>Ed Hopkins over at the <a href="http://www.aos.wisc.edu/~sco/">Wisconsin State Climatology Office</a> maintains a listing of the dates and durations of full-freeze ice covers on our dear Madison lakes, Mendota and Monona, found <a href="http://www.aos.wisc.edu/~sco/lakes/Mendota-ice.html">here</a>. This data goes back to the mid-1800s, thanks to handwritten records in some very old log books (they're behind glass in Ed's office over in AOS).</p>
+<p>Analyzing this data is an interesting exploration in the changes in our local climate over time, so let's use some machine learning techniques to take a look at the data.</p>
+<h2>Program Specification</h2>
+<p>As with most real problems, the data is not as clean or as organized as one would like for machine learning. You'll be retrieving the data for Lake Mendota from <a href="http://www.aos.wisc.edu/~sco/lakes/Mendota-ice.html">http://www.aos.wisc.edu/~sco/lakes/Mendota-ice.html</a> and cleaning it for your program.</p>
+<p>Write the following Python functions in a file called <code>ice_cover.py</code> (yes there are a lot, <em>most</em> of them are pretty short and have sample output):</p>
+<ol>
+<li>
+<span style="background-color: #ffff00;"><strong>get_dataset()</strong></span> — takes no arguments and <strong>returns</strong> the data as described below in an n-by-2 array</li>
+<li>
+<span style="background-color: #ffff00;"><strong>print_stats(dataset)</strong></span> — takes the dataset as produced by the previous function and <strong>prints</strong> several statistics about the data; does not return anything</li>
+<li>
+<span style="background-color: #ffff00;"><strong>regression(beta_0, beta_1)</strong></span> — calculates and <strong>returns</strong> the mean squared error on the dataset given fixed betas</li>
+<li>
+<span style="background-color: #ffff00;"><strong>gradient_descent(beta_0, beta_1)</strong></span> — performs a single step of gradient descent on the MSE and <strong>returns</strong> the derivative values as a tuple</li>
+<li>
+<span style="background-color: #ffff00;"><strong>iterate_gradient(T, eta)</strong></span> — performs T iterations of gradient descent starting at <img class="equation_image" title="(\beta_0, \beta_1) = (0,0)" src="/equation_images/(%255Cbeta_0%252C%2520%255Cbeta_1)%2520%253D%2520(0%252C0)" alt="LaTeX: (\beta_0, \beta_1) = (0,0)" data-equation-content="(\beta_0, \beta_1) = (0,0)"> with the given parameter and <strong>prints</strong> the results; does not return anything</li>
+<li>
+<span style="background-color: #ffff00;"><strong>compute_betas()</strong></span> — using the closed-form solution, calculates and <strong>returns</strong> the values of <img class="equation_image" title="\beta_0" src="/equation_images/%255Cbeta_0" alt="LaTeX: \beta_0" data-equation-content="\beta_0"> and <img class="equation_image" title="\beta_1" src="/equation_images/%255Cbeta_1" alt="LaTeX: \beta_1" data-equation-content="\beta_1"> and the corresponding MSE as a three-element tuple</li>
+<li>
+<span style="background-color: #ffff00;"><strong>predict(year)</strong></span> — using the closed-form solution betas, <strong>return</strong> the predicted number of ice days for that year</li>
+<li>
+<span style="background-color: #ffff00;"><strong>iterate_normalized(T, eta)</strong></span> — normalizes the data before performing gradient descent, <strong>prints</strong> results as in function 5</li>
+<li>
+<span style="background-color: #ffff00;"><strong>sgd(T, eta)</strong></span> — performs stochastic gradient descent, <strong>prints</strong> results as in function 5</li>
+</ol>
+<h3>Get Dataset</h3>
+<p>The <code>get_dataset()</code> function should return an n-by-2 array of data, where n is the number of winters between 1855 and 2019.</p>
+<p>Curate a clean data set starting from 1855-56 and ending in 2019-20. Let <em>x</em> be the beginning year: for 1855-56, <em>x</em>= 1855; for 2019-20, <em>x</em>= 2019; and so on. Let <em>y</em> be the total number of ice days in that year: for 1855-56, <em>y</em>= 118; for 2019-20, y= 70; and so on.</p>
+<p>Note that some years have multiple freeze/thaw cycles, such as 2018-19. That year should be recorded as <em>x</em>= 2018, <em>y</em>= 86. Although we do not ask you to hand in any visualization code or figures, we strongly advise you to plot the data (using any plotting tool inside or outside Python) and see what it is like. Or you can mess around with <a href="https://climatewisconsin.org/story/ice-cover.html">PBS Wisconsin's Ice Cover visualization tool</a>, which Hobbes thinks is pretty neat <span style="text-decoration: line-through;">but that might be because she wrote it</span>.</p>
+<p>For simplicity, hard code the data set in your program. For the rest of this assignment we will refer to the year value (e.g. 1855, 1926, 2019) as <strong>x</strong> and the ice days value (e.g. 118, 103, 70) as <strong>y</strong>.</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>get_dataset()</strong></span><br><span style="color: #339966;"><strong>=&gt; [[1855, 118],</strong></span><br><span style="color: #339966;"><strong>     ...</strong></span><br><span style="color: #339966;"><strong>    [1926, 103],</strong></span><br><span style="color: #339966;"><strong>     ...</strong></span><br><span style="color: #339966;"><strong>    [2019, 70]]</strong></span></pre>
+<h3>Dataset Statistics</h3>
+<p>This is just a quick summary function for the above dataset. When called, you should <strong>print</strong>:</p>
+<ol>
+<li>the number of data points</li>
+<li>the sample mean <img class="equation_image" title="\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i" src="/equation_images/%255Cbar%257By%257D%2520%253D%2520%255Cfrac%257B1%257D%257Bn%257D%255Csum_%257Bi%253D1%257D%255En%2520y_i" alt="LaTeX: \bar{y} = \frac{1}{n}\sum_{i=1}^n y_i" data-equation-content="\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i">
+</li>
+<li>the sample standard deviation <img class="equation_image" title="\sqrt{\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2}" src="/equation_images/%255Csqrt%257B%255Cfrac%257B1%257D%257Bn-1%257D%255Csum_%257Bi%253D1%257D%255En(y_i-%255Cbar%257By%257D)%255E2%257D" alt="LaTeX: \sqrt{\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2}" data-equation-content="\sqrt{\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2}">
+</li>
+</ol>
+<p>on three lines. Please format your output to include only TWO digits after the decimal point. For example (numbers are made up and <span style="text-decoration: underline;">do not correspond to actual output</span>, you will need to calculate these results yourself):</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>data = get_dataset()</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>print_stats(data)</strong></span><br>165<br>123.45<br>32.10</pre>
+<h3>Linear Regression</h3>
+<p>This function will perform linear regression with the model</p>
+<p style="text-align: center;"><img class="equation_image" title="f(x)= \beta_0 + \beta_1 x" src="/equation_images/f(x)%253D%2520%255Cbeta_0%2520%252B%2520%255Cbeta_1%2520x" alt="LaTeX: f(x)= \beta_0 + \beta_1 x" width="142" height="25" data-equation-content="f(x)= \beta_0 + \beta_1 x"></p>
+<p style="text-align: left;">We first define the mean squared error (MSE) as a function of the betas:</p>
+<p style="text-align: center;"><img class="equation_image" title="\text{MSE}(\beta_0, \beta_1) = \frac{1}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)^2" src="/equation_images/%255Ctext%257BMSE%257D(%255Cbeta_0%252C%2520%255Cbeta_1)%2520%253D%2520%255Cfrac%257B1%257D%257Bn%257D%255Csum_%257Bi%253D1%257D%255En(%255Cbeta_0%252B%255Cbeta_1%2520x_i%2520-%2520y_i)%255E2" alt="LaTeX: \text{MSE}(\beta_0, \beta_1) = \frac{1}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)^2" width="368" height="30" data-equation-content="\text{MSE}(\beta_0, \beta_1) = \frac{1}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)^2"></p>
+<p style="text-align: left;">The two arguments for this function represent these two betas. <strong>Return</strong> the corresponding MSE as calculated on your dataset (which you should retrieve within your function by calling your <code>get_dataset()</code> function).</p>
+<pre style="text-align: left;">&gt;&gt;&gt; <span style="color: #3366ff;"><strong>regression(0,0)</strong></span><br><span style="color: #339966;"><strong>=&gt; 10827.78</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>regression(100,0)</strong></span><br><span style="color: #339966;"><strong>=&gt; 386.57</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>regression(300,-.1)</strong></span><br><span style="color: #339966;"><strong>=&gt; 332.83</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>regression(400,.1)</strong></span><br><span style="color: #339966;"><strong>=&gt; 242059.01</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>regression(200,-.2)</strong></span><br><span style="color: #339966;"><strong>=&gt; 84167.47</strong></span></pre>
+<p style="text-align: left;">Note that I'm continuing to round these values to two decimal places for clarity; your returned values should be the full floats.</p>
+<h3 style="text-align: left;">Gradient Descent</h3>
+<p>This function will perform gradient descent on the MSE. At the current parameter <img class="equation_image" title="(\beta_0,\beta_1)" src="/equation_images/(%255Cbeta_0%252C%255Cbeta_1)" alt="LaTeX: (\beta_0,\beta_1)" data-equation-content="(\beta_0,\beta_1)">, the gradient is defined by the vector of partial derivatives:</p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} = \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i) \\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} =  \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)x_i" src="/equation_images/%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D(%255Cbeta_0%252C%255Cbeta_1)%257D%257B%255Cpartial%255Cbeta_0%257D%2520%253D%2520%255Cfrac%257B2%257D%257Bn%257D%255Csum_%257Bi%253D1%257D%255En(%255Cbeta_0%252B%255Cbeta_1%2520x_i%2520-%2520y_i)%2520%255C%255C%250A%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D(%255Cbeta_0%252C%255Cbeta_1)%257D%257B%255Cpartial%255Cbeta_1%257D%2520%253D%2520%2520%255Cfrac%257B2%257D%257Bn%257D%255Csum_%257Bi%253D1%257D%255En(%255Cbeta_0%252B%255Cbeta_1%2520x_i%2520-%2520y_i)x_i" alt="LaTeX: \frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} = \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i) \\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} =  \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)x_i" width="385" height="95" data-equation-content="\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} = \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i) \\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} =  \frac{2}{n}\sum_{i=1}^n(\beta_0+\beta_1 x_i - y_i)x_i"></p>
+<p>This function <strong>returns</strong> the corresponding gradient as a tuple with the partial derivative with respect to <img class="equation_image" title="\beta_0" src="/equation_images/%255Cbeta_0" alt="LaTeX: \beta_0" data-equation-content="\beta_0"> as the first value.</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>gradient_descent(0,0)</strong></span><br><span style="color: #339966;"><strong>=&gt; (-204.41, -395063.04)</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>gradient_descent(100,0)</strong></span><br><span style="color: #339966;"><strong>=&gt; (-4.41, -7663.04)</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>gradient_descent(300,-.1)</strong></span><br><span style="color: #339966;"><strong>=&gt; (8.19, 16289.42)</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>gradient_descent(400,.1)</strong></span><br><span style="color: #339966;"><strong>=&gt; (982.99, 1905384.49)</strong></span><br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>gradient_descent(200,-.2)</strong></span><br><span style="color: #339966;"><strong>=&gt; (-579.21, -1121958.11)</strong></span></pre>
+<h3>Iterate Gradient</h3>
+<p>Gradient descent starts from initial parameter <img class="equation_image" title="\left(\beta_0^{\left(0\right)},\beta_1^{\left(0\right)}\right)" src="/equation_images/%255Cleft(%255Cbeta_0%255E%257B%255Cleft(0%255Cright)%257D%252C%255Cbeta_1%255E%257B%255Cleft(0%255Cright)%257D%255Cright)" alt="LaTeX: \left(\beta_0^{\left(0\right)},\beta_1^{\left(0\right)}\right)" data-equation-content="\left(\beta_0^{\left(0\right)},\beta_1^{\left(0\right)}\right)"> and iterates the following updates at time t = 1, 2, ... , T:</p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\beta_0^{\left(t\right)}\:=\beta_0^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_0}" src="/equation_images/%255Cbeta_0%255E%257B%255Cleft(t%255Cright)%257D%255C%253A%253D%255Cbeta_0%255E%257B%255Cleft(t-1%255Cright)%257D-%255Ceta%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D%255Cleft(%255Cbeta_0%255E%257B%255Cleft(t-1%255Cright)%257D%252C%255Cbeta_1%255E%257B%255Cleft(t-1%255Cright)%257D%255Cright)%257D%257B%255Cpartial%255Cbeta_0%257D" alt="LaTeX: \beta_0^{\left(t\right)}\:=\beta_0^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_0}" width="299" height="55" data-equation-content="\beta_0^{\left(t\right)}\:=\beta_0^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_0}"></p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\beta_1^{\left(t\right)}=\beta_1^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_1}" src="/equation_images/%255Cbeta_1%255E%257B%255Cleft(t%255Cright)%257D%253D%255Cbeta_1%255E%257B%255Cleft(t-1%255Cright)%257D-%255Ceta%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D%255Cleft(%255Cbeta_0%255E%257B%255Cleft(t-1%255Cright)%257D%252C%255Cbeta_1%255E%257B%255Cleft(t-1%255Cright)%257D%255Cright)%257D%257B%255Cpartial%255Cbeta_1%257D" alt="LaTeX: \beta_1^{\left(t\right)}=\beta_1^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_1}" width="300" height="56" data-equation-content="\beta_1^{\left(t\right)}=\beta_1^{\left(t-1\right)}-\eta\frac{\partial\text{MSE}\left(\beta_0^{\left(t-1\right)},\beta_1^{\left(t-1\right)}\right)}{\partial\beta_1}"></p>
+<p>The parameters to this function are the T number of iterations to perform, and <img class="equation_image" title="\eta" src="/equation_images/%255Ceta" alt="LaTeX: \eta" data-equation-content="\eta"> (eta), the parameter for the above calculations. Always begin from initial parameter <img class="equation_image" title="\left(\beta^{\left(0\right)}_0,\beta_1^{\left(0\right)}\right)\:=\:\left(0,0\right)" src="/equation_images/%255Cleft(%255Cbeta%255E%257B%255Cleft(0%255Cright)%257D_0%252C%255Cbeta_1%255E%257B%255Cleft(0%255Cright)%257D%255Cright)%255C%253A%253D%255C%253A%255Cleft(0%252C0%255Cright)" alt="LaTeX: \left(\beta^{\left(0\right)}_0,\beta_1^{\left(0\right)}\right)\:=\:\left(0,0\right)" data-equation-content="\left(\beta^{\left(0\right)}_0,\beta_1^{\left(0\right)}\right)\:=\:\left(0,0\right)">.</p>
+<p><strong>Print</strong> the following for each iteration on one line, separated by spaces:</p>
+<ol>
+<li>the current iteration number beginning at 1 and ending at T</li>
+<li>the current value of beta_0</li>
+<li>the current value of beta_1</li>
+<li>the current MSE</li>
+</ol>
+<p>As before, all floating point values should be rounded to two digits for output.</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>iterate_gradient(5, 1e-7)</strong></span><br>1 0.00 0.04 1079.72<br>2 0.00 0.05 474.59<br>3 0.00 0.05 437.03<br>4 0.00 0.05 434.69<br>5 0.00 0.05 434.55<br>&gt;&gt;&gt; <strong><span style="color: #3366ff;">iterate_gradient(5, 1e-8)</span></strong><br>1 0.00 0.00 9325.63<br>2 0.00 0.01 8040.58<br>3 0.00 0.01 6941.27<br>4 0.00 0.01 6000.84<br>5 0.00 0.02 5196.33<br>&gt;&gt;&gt; <strong><span style="color: #3366ff;">iterate_gradient(5, 1e-9)</span></strong><br>1 0.00 0.00 10672.29<br>2 0.00 0.00 10519.13<br>3 0.00 0.00 10368.26<br>4 0.00 0.00 10219.64<br>5 0.00 0.00 10073.25<br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>iterate_gradient(5, 1e-6)</strong></span><br>1 0.00 0.40 440695.17<br>2 -0.00 -2.18 18649996.73<br>3 0.01 14.56 790001058.39<br>4 -0.05 -94.36 33464645835.46<br>5 0.32 614.54 1417571655440.93</pre>
+<p>Note that with eta = 1e-6 gradient descent is diverging! Try different values for eta and a much larger T, and see how small you can make MSE (optional).</p>
+<h3>Compute Betas</h3>
+<p>Instead of using gradient descent, we can compute the closed-form solution for the parameters directly. For ordinary least-squared in 1D, this is</p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\hat{\beta}_1 = \frac{\sum(x_i - \bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} \\
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}" src="/equation_images/%255Chat%257B%255Cbeta%257D_1%2520%253D%2520%255Cfrac%257B%255Csum(x_i%2520-%2520%255Cbar%257Bx%257D)(y_i-%255Cbar%257By%257D)%257D%257B%255Csum(x_i-%255Cbar%257Bx%257D)%255E2%257D%2520%255C%255C%250A%255Chat%257B%255Cbeta%257D_0%2520%253D%2520%255Cbar%257By%257D%2520-%2520%255Chat%257B%255Cbeta%257D_1%255Cbar%257Bx%257D" alt="LaTeX: \hat{\beta}_1 = \frac{\sum(x_i - \bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} \\
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}" width="183" height="90" data-equation-content="\hat{\beta}_1 = \frac{\sum(x_i - \bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} \\
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x}"></p>
+<p>where <img class="equation_image" title="\bar{x} = (\sum x_i)/n" src="/equation_images/%255Cbar%257Bx%257D%2520%253D%2520(%255Csum%2520x_i)%252Fn" alt="LaTeX: \bar{x} = (\sum x_i)/n" data-equation-content="\bar{x} = (\sum x_i)/n"> and <img class="equation_image" title="\bar{y} = (\sum y_i)/n" src="/equation_images/%255Cbar%257By%257D%2520%253D%2520(%255Csum%2520y_i)%252Fn" alt="LaTeX: \bar{y} = (\sum y_i)/n" data-equation-content="\bar{y} = (\sum y_i)/n">.</p>
+<p>This function returns the calculated betas and their corresponding MSE in a tuple, as (beta_0, beta_1, MSE).</p>
+<p>And no, I'm not going to tell you what the answers are. Do the math.</p>
+<h3>Predict Ice Cover</h3>
+<p>Using your closed-form betas, predict the number of ice days for a future year. Return that value.</p>
+<p>For example:</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>predict(2021)</strong></span><br><span style="color: #339966;"><strong>=&gt; 85.85</strong></span></pre>
+<p>Food for thought (you don't need to write this up or turn it in, but if you want to discuss it on Piazza please do):</p>
+<ul>
+<li>What's the prediction for next year? five years from now?</li>
+<li>Which year will the predicted number of ice days become negative?</li>
+<li>What does this say about our model?</li>
+</ul>
+<h3>Normalized Gradient Descent</h3>
+<p>Can't get your iterating gradient descent to match the closed-form solution? You're not alone! The culprit is the scale of input x, compared to the implicit offset value 1 (think <img class="equation_image" title="\beta_0\:=\:\beta_0\cdot1" src="/equation_images/%255Cbeta_0%255C%253A%253D%255C%253A%255Cbeta_0%255Ccdot1" alt="LaTeX: \beta_0\:=\:\beta_0\cdot1" data-equation-content="\beta_0\:=\:\beta_0\cdot1">). Gradient descent converges slowly when these scales differ greatly, a situation known as bad condition number in optimization.</p>
+<p>For this function, first normalize your x values (NOT the y values):</p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i \\
+std_x = \sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\\
+x_i \leftarrow (x_i - \bar{x})/std_x" src="/equation_images/%255Cbar%257Bx%257D%2520%253D%2520%255Cfrac%257B1%257D%257Bn%257D%255Csum_%257Bi%253D1%257D%255En%2520x_i%2520%255C%255C%250Astd_x%2520%253D%2520%255Csqrt%257B%255Cfrac%257B1%257D%257Bn-1%257D%255Csum_%257Bi%253D1%257D%255En(x_i-%255Cbar%257Bx%257D)%255E2%257D%255C%255C%250Ax_i%2520%255Cleftarrow%2520(x_i%2520-%2520%255Cbar%257Bx%257D)%252Fstd_x" alt="LaTeX: \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i \\
+std_x = \sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\\
+x_i \leftarrow (x_i - \bar{x})/std_x" width="262" height="110" data-equation-content="\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i \\
+std_x = \sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\\
+x_i \leftarrow (x_i - \bar{x})/std_x"></p>
+<p>then proceed exactly as in <code>iterate_gradient()</code>:</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>iterate_normalized(5, 0.1)</strong></span><br>1 20.44 -1.85 7036.41<br>2 36.79 -3.33 4609.88<br>3 49.88 -4.52 3056.86<br>4 60.34 -5.47 2062.90<br>5 68.72 -6.23 1426.75<br>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>iterate_normalized(5, 0.01)</strong></span><br>1 2.04 -0.18 10410.73<br>2 4.05 -0.37 10010.20<br>3 6.01 -0.54 9625.53<br>4 7.93 -0.72 9256.08<br>5 9.82 -0.89 8901.27</pre>
+<p>With <img class="equation_image" title="\eta=0.1" src="/equation_images/%255Ceta%253D0.1" alt="LaTeX: \eta=0.1" data-equation-content="\eta=0.1"> you should get convergence within 100 iterations. (Note that the betas are now for the normalized version of x, but you can translate them back to the original x with a little algebra. This isn't required for the homework.)</p>
+<h3>Stochastic Gradient Descent</h3>
+<p>Now let's have some fun with randomness and implement Stochastic Gradient Descent (SGD). With everything the same as part 8 (including normalization), modify the gradient as follows: in iteration t, randomly pick ONE of the n items (call it <img class="equation_image" title="\left(x_{j_t},\:y_{j_t}\right)" src="/equation_images/%255Cleft(x_%257Bj_t%257D%252C%255C%253Ay_%257Bj_t%257D%255Cright)" alt="LaTeX: \left(x_{j_t},\:y_{j_t}\right)" data-equation-content="\left(x_{j_t},\:y_{j_t}\right)">), and approximate the gradient using <em>only that item</em>.</p>
+<p><img class="equation_image" style="display: block; margin-left: auto; margin-right: auto;" title="\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})\\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})x_{j_t}" src="/equation_images/%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D(%255Cbeta_0%252C%255Cbeta_1)%257D%257B%255Cpartial%255Cbeta_0%257D%2520%255Capprox%25202(%255Cbeta_0%2520%252B%255Cbeta_1x_%257Bj_t%257D%2520-%2520y_%257Bj_t%257D)%255C%255C%250A%255Cfrac%257B%255Cpartial%255Ctext%257BMSE%257D(%255Cbeta_0%252C%255Cbeta_1)%257D%257B%255Cpartial%255Cbeta_1%257D%2520%255Capprox%25202(%255Cbeta_0%2520%252B%255Cbeta_1x_%257Bj_t%257D%2520-%2520y_%257Bj_t%257D)x_%257Bj_t%257D" alt="LaTeX: \frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})\\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})x_{j_t}" width="396" height="109" data-equation-content="\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_0} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})\\
+\frac{\partial\text{MSE}(\beta_0,\beta_1)}{\partial\beta_1} \approx 2(\beta_0 +\beta_1x_{j_t} - y_{j_t})x_{j_t}"></p>
+<p>Print the same information as in the previous function. For example (your results WILL differ because of randomness in the items selected):</p>
+<pre>&gt;&gt;&gt; <span style="color: #3366ff;"><strong>sgd(5, 0.1)</strong></span><br>1 17.60 14.00 7993.47<br>2 36.50 24.68 5760.88<br>3 51.86 8.92 3160.46<br>4 70.23 -17.22 1380.68<br>5 82.74 -6.49 682.61</pre>
+<p>With <img class="equation_image" title="\eta=0.1" src="/equation_images/%255Ceta%253D0.1" alt="LaTeX: \eta=0.1" data-equation-content="\eta=0.1"> you should approximately converge within a few hundred iterations.</p>
+<p>Since n is small in our dataset, there is little advantage of SGD over standard gradient descent. However, on large datasets, SGD becomes much more desirable...</p>
+<h2>Submission</h2>
+<p>Please submit your code in a file called <code>ice_cover.py</code>. All code should be contained in functions or under a</p>
+<pre>if __name__=="__main__":</pre>
+<p>check so that it will not run if your code is imported to another program.</p></div>
+
+
+  <div style="display: none;">
+    <span class="timestamp">1587047340</span>
+    <span class="due_date_string">04/16/2020</span>
+    <span class="due_time_string">09:29am</span>
+  </div>
+</div>
+
+
+
+  
+
+
+  <div id="rubrics" class="mathjax_ignore" style="margin-bottom: 10px;">
+      
+<div
+  class="rubric_container rubric  for_grading"
+  id="rubric_36851"
+  style=""
+>
+  <div class="screenreader-only"><h2>Rubric</h2></div>
+  <div class="rubric_title">
+    <div style="display: none;" class="links displaying pull-right">
+      <a
+        href="/courses/176717/rubrics/36851?rubric_association_id=78668"
+        class="copy_edit edit_rubric_link no-print no-hover"
+        style="display: none;"
+        title="Edit Rubric"
+        aria-label="Edit Rubric"
+        role="button"
+      ><i class="icon-edit standalone-icon"></i></a>
+      <a
+        href="https://canvas.wisc.edu/search/rubrics?q="
+        class="find_rubric_link no-print no-hover"
+        style="display: none;"
+        title="Find Another Rubric"
+        aria-label="Find Another Rubric"
+        role="button"
+      ><i class="icon-search standalone-icon"></i></a>
+        <a
+          href="/courses/176717/rubric_associations/78668"
+          class="delete_rubric_link no-print no-hover"
+          style="display: none;"
+          title="Delete Rubric"
+          aria-label="Delete Rubric"
+          role="button"
+        ><i class="icon-trash standalone-icon"></i></a>
+      <div style="display: none;">
+        <div class="use_for_grading">true</div>
+        <div class="free_form_criterion_comments">&nbsp;</div>
+        <div class="hide_score_total">&nbsp;</div>
+        <div class="hide_outcome_results">&nbsp;</div>
+        <div class="hide_points">&nbsp;</div>
+        <div class="rubric_association_id">78668</div>
+          <div class="user_id">&nbsp;</div>
+        <div class="assessment_type"></div>
+        <a href="/courses/176717/rubric_associations/78668/assessments/%7B%7B%20assessment_id%20%7D%7D" rel="nofollow" class="edit_assessment_link">&nbsp;</a>
+        <a href="/courses/176717/rubrics/%7B%7B%20rubric_id%20%7D%7D" class="edit_rubric_url">&nbsp;</a>
+          <a href="/courses/176717/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url">&nbsp;</a>
+      </div>
+    </div>
+    <div style="float: right; font-size: 0.8em; display: none;" class="links displaying locked">
+      <span style="">Can&#39;t change a rubric once you&#39;ve started using it.</span>
+        <a href="/courses/176717/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url" style="display: none;">&nbsp;</a>
+    </div>
+
+    <div class="editing" style="float: right;">
+      <a href="https://canvas.wisc.edu/search/rubrics?q=" class="find_rubric_link icon-search" style="display: none;" title="Find Existing Rubric">Find a Rubric</a>
+    </div>
+    <div class="editing" style="text-align: left">
+      <label for="rubric-title">Title:</label>
+      <input id="rubric-title" type="text" class="no-margin-bottom" name="title" value="Some Rubric" style="width: 200px;" maxlength="255" aria-label="Title:"/>
+      <a href="https://canvas.wisc.edu/search/rubrics?q=" style="display: none;"><img alt="" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/find-6164443e2a.png" /> Find Rubric</a>
+        <div class="editing" style="font-size: 0.8em;">Keep in mind that 146 students have already been assessed using this rubric. Changing it will affect their evaluations.</div>
+    </div>
+    <div class="displaying">
+      <span class="title" tabindex="-1">Some Rubric</span>
+    </div>
+    <div class="has-assessments-warning" style="display: none;">
+      You&#39;ve already rated students with this rubric. Any major changes could affect their assessment results.
+    </div>
+  </div>
+<table class="rubric_table">
+<caption>
+  <div class="screenreader-only">
+    <span class="title">Some Rubric</span>
+  </div>
+</caption>
+<thead>
+  <tr>
+    <th scope="col">Criteria</th>
+    <th scope="col">Ratings</th>
+    <th scope="col" class="toggle_for_hide_points ">
+      Pts
+    </th>
+  </tr>
+</thead>
+<tbody>
+      
+<tr id="criterion__9309" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">get_dataset() returns the correct values in a 2D array</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_9309</span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" /></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank_2</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__8469" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">print_stats() displays the correct values with correct formatting</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_8469</span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_1761</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_5408</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__9823" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">regression() returns correct MSE</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_9823</span>
+          <div class="long_description small_description">Note: tests will involve betas other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_7653</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_234</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__8210" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">gradient_descent() returns correct partial derivatives</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_8210</span>
+          <div class="long_description small_description">Note: tests will involve betas other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_6669</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_250</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__375" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">iterate_gradient(), iterate_normal(), and sgd() printed output is formatted correctly</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_375</span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_9531</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_8131</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__1560" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">iterate_gradient() produces correct values</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_1560</span>
+          <div class="long_description small_description">Note: tests will involve T and eta other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_9903</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_6039</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__3419" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">compute_betas() returns the correct values</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_3419</span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_4575</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_8553</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__9428" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">predict() returns the correct value</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_9428</span>
+          <div class="long_description small_description">Note: tests will involve years other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_5565</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_3852</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__2045" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">iterate_normalized() produces correct values</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_2045</span>
+          <div class="long_description small_description">Note: tests will involve T and eta other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_845</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_6312</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+      
+<tr id="criterion__2286" class="criterion   " style="">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">sgd() produces correct values</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;">_2286</span>
+          <div class="long_description small_description">Note: tests will involve T and eta other than those given in sample output</div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" checked/></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points"></span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">10</span>
+                  <span class="range_rating" style="">to ><span class="min_points">0.0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_4574</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">_9116</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="10"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">10</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+  
+<tr id="criterion_blank" class="criterion blank  " style="display: none;">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+          <a href="#" class="delete_criterion_link" role="button"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Delete criterion row</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">Description of criterion</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;"></span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" /></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points">5</span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">5</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank_2</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="5"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">5</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+  <tr class="summary">
+    <td colspan="4">
+      <div class="total_points_holder toggle_for_hide_points "
+        style="float: right; ">
+        <span>Total Points:
+            <span class="rubric_total">
+              100
+            </span>
+ <span class="assessing">out of 100</span>        </span>
+      </div>
+      <div class="editing pull-left">
+        <span id="add_criterion_holder" class="criterion_link"></span>
+      </div>
+      <div class="clear"></div>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<table style="display: none;">
+  <tr id="edit_rubric">
+    <td colspan="4">
+      <form id="edit_rubric_form" class="edit-rubric-form no-margin-bottom">
+        <div class="rubric_custom_ratings" style="">
+          <input type="checkbox" id="rubric_custom_rating" class="rubric_custom_rating" />
+          <label for="rubric_custom_rating">I&#39;ll write free-form comments when assessing students</label>
+        </div>
+          <div class="hide_points" style="">
+            <input type="checkbox" id="hide_points" class="hide_points_checkbox" />
+            <label for="hide_points">Remove points from rubric</label>
+          </div>
+          <div class="hide_outcome_results" style="">
+            <input type="checkbox" id="hide_outcome_results" class="hide_outcome_results_checkbox" />
+            <label for="hide_outcome_results">Don&#39;t post Outcomes results to Learning Mastery Gradebook</label>
+          </div>
+          <div class="rubric_grading" style="">
+            <input type="checkbox" id="grading_rubric" class="grading_rubric_checkbox" checked/>
+            <label for="grading_rubric">Use this rubric for assignment grading</label>
+          </div>
+        <div class="totalling_rubric" style="">
+          <input type="checkbox" id="totalling_rubric" class="totalling_rubric_checkbox" />
+          <label for="totalling_rubric">Hide score total for assessment results</label>
+        </div>
+        <div class="ic-Action-header ic-Action-header--half-margin">
+          <div class="ic-Action-header__Primary">
+            <button type="button" class="Button cancel_button">Cancel</button>
+            <button type="submit" class="Button Button--primary save_button">Create Rubric</button>
+          </div>
+        </div>
+      </form>
+    </td>
+  </tr>
+</table>
+
+    <div style="display: none;" id="rubric_parameters">
+      <input type="hidden" name="rubric_association[association_type]" value="Assignment"/>
+      <input type="hidden" name="rubric_association[association_id]" value="807809"/>
+      <input type="hidden" name="rubric_association[purpose]" value="grading"/>
+    </div>
+    
+<div id="rubric_long_description_dialog" style="display: none;">
+  <div class="editing">
+    <form id="edit_criterion_form" class="no-margin-bottom">
+      <div>
+        <label class="rating_form_label">Description
+          <textarea class="description" rows="1" name="description"></textarea>
+        </label>
+      </div>
+      <div>
+        <label class="rating_form_label">Long Description
+          <textarea class="long_description" rows="4" name="long_description"></textarea>
+        </label>
+      </div>
+      <div class="button-container">
+        <button type="button" class="btn btn button-secondary cancel_button">Cancel</button>
+        <button type="button" class="btn save_button btn-primary">Update Criterion</button>
+      </div>
+    </form>
+  </div>
+  <div class="displaying">
+    <div class="long_description">
+    </div>
+  </div>
+</div>
+<div id="rubric_criterion_comments_dialog" style="display: none;">
+  <div
+    class="criterion_description"
+    style="border-bottom: 1px solid #ccc; padding: 5px 0; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;"
+    tabindex="-1"
+  ></div>
+  <div class="editing">
+    <label for="criterion_comments_textarea">
+      Additional Comments:
+    </label>
+    <textarea
+      id="criterion_comments_textarea"
+      class="criterion_comments"
+      name="criterion_comments"
+      style="width: 370px;"></textarea>
+    <div class="button-container">
+      <button type="button" class="btn btn button-secondary cancel_button">Cancel</button>
+      <button type="button" class="btn save_button">Update Comments</button>
+    </div>
+  </div>
+  <div class="displaying">
+    Additional Comments:
+    <div class="criterion_comments" style="margin-top: 10px;">
+    </div>
+  </div>
+</div>
+<div id="rubric_rating_dialog" style="display: none;">
+  <div class="description" style="border-bottom: 1px solid #ccc; padding: 5px 0; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;">
+    <span id="edit_rating_form_criterion_description"></span>
+  </div>
+  <div class="editing">
+    <form id="edit_rating_form" class="no-margin-bottom">
+      <div class="toggle_for_hide_points">
+        <div><label id='rating_form_score_label' class="rating_form_label">Rating Score</label></div>
+        <span id='rating_form_max_score_label' hidden>Rating max score</span>
+        <input id="points" aria-labelledby="rating_form_score_label" type="text" size="2" name="points" class="no-margin-bottom span1" />
+        <span class="range_rating">to >
+          <input aria-label="Rating min score" type="text" size="2" name="min_points" class="no-margin-bottom span1 min_points" placeholder="min"/>
+        </span>pts
+      </div>
+      <div>
+        <label for="rating_form_title" class="rating_form_label">Rating Title</label>
+        <input id="rating_form_title" type="text" class="rating_description" style="width: 90%;" name="description"/>
+      </div>
+      <div>
+        <label for="rating_form_description" class="rating_form_label">Rating Description</label>
+        <textarea id="rating_form_description" rows="4" style="width: 90%;" class="rating_long_description" name="rating_long_description" form="edit_rating_form"></textarea>
+      </div>
+      <div class="button-container">
+        <button type="button" class="btn button-secondary cancel_button">Cancel</button>
+        <button type="button" class="btn btn-primary save_button ok_button">Update Rating</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  </div>
+  
+<div
+  class="rubric_container rubric  "
+  id="default_rubric"
+  style="display: none;"
+>
+  <div class="screenreader-only"><h2>Rubric</h2></div>
+  <div class="rubric_title">
+    <div style="display: none;" class="links displaying pull-right">
+      <a
+        href="/courses/176717/rubrics/%7B%7B%20id%20%7D%7D"
+        class=" edit_rubric_link no-print no-hover"
+        style=""
+        title="Edit Rubric"
+        aria-label="Edit Rubric"
+        role="button"
+      ><i class="icon-edit standalone-icon"></i></a>
+      <a
+        href="https://canvas.wisc.edu/search/rubrics?q="
+        class="find_rubric_link no-print no-hover"
+        style=""
+        title="Find Another Rubric"
+        aria-label="Find Another Rubric"
+        role="button"
+      ><i class="icon-search standalone-icon"></i></a>
+        <a
+          href="/courses/176717/rubric_associations/%7B%7B%20rubric_association_id%20%7D%7D"
+          class="delete_rubric_link no-print no-hover"
+          style=""
+          title="Delete Rubric"
+          aria-label="Delete Rubric"
+          role="button"
+        ><i class="icon-trash standalone-icon"></i></a>
+      <div style="display: none;">
+        <div class="use_for_grading">&nbsp;</div>
+        <div class="free_form_criterion_comments">&nbsp;</div>
+        <div class="hide_score_total">&nbsp;</div>
+        <div class="hide_outcome_results">&nbsp;</div>
+        <div class="hide_points">&nbsp;</div>
+        <div class="rubric_association_id">&nbsp;</div>
+          <div class="user_id">&nbsp;</div>
+        <div class="assessment_type"></div>
+        <a href="/courses/176717/rubric_associations/%7B%7B%20rubric_association_id%20%7D%7D/assessments/%7B%7B%20assessment_id%20%7D%7D" rel="nofollow" class="edit_assessment_link">&nbsp;</a>
+        <a href="/courses/176717/rubrics/%7B%7B%20rubric_id%20%7D%7D" class="edit_rubric_url">&nbsp;</a>
+          <a href="/courses/176717/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url">&nbsp;</a>
+      </div>
+    </div>
+    <div style="float: right; font-size: 0.8em; display: none;" class="links displaying locked">
+      <span style="">Can&#39;t change a rubric once you&#39;ve started using it.</span>
+        <a href="/courses/176717/rubric_associations/%7B%7B%20association_id%20%7D%7D" class="delete_rubric_url" style="display: none;">&nbsp;</a>
+    </div>
+
+    <div class="editing" style="float: right;">
+      <a href="https://canvas.wisc.edu/search/rubrics?q=" class="find_rubric_link icon-search" style="" title="Find Existing Rubric">Find a Rubric</a>
+    </div>
+    <div class="editing" style="text-align: left">
+      <label for="rubric-title">Title:</label>
+      <input id="rubric-title" type="text" class="no-margin-bottom" name="title" value="Some Rubric" style="width: 200px;" maxlength="255" aria-label="Title:"/>
+      <a href="https://canvas.wisc.edu/search/rubrics?q=" style="display: none;"><img alt="" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/find-6164443e2a.png" /> Find Rubric</a>
+    </div>
+    <div class="displaying">
+      <span class="title" tabindex="-1">Title</span>
+    </div>
+    <div class="has-assessments-warning" style="display: none;">
+      You&#39;ve already rated students with this rubric. Any major changes could affect their assessment results.
+    </div>
+  </div>
+<table class="rubric_table">
+<caption>
+  <div class="screenreader-only">
+    <span class="title">Title</span>
+  </div>
+</caption>
+<thead>
+  <tr>
+    <th scope="col">Criteria</th>
+    <th scope="col">Ratings</th>
+    <th scope="col" class="toggle_for_hide_points ">
+      Pts
+    </th>
+  </tr>
+</thead>
+<tbody>
+  
+<tr id="criterion_blank" class="criterion blank  " style="display: none;">
+  <td class="criterion_description hover-container pad-box-micro">
+    <div class="container">
+      <div class="links editing">
+          <a href="#" class="edit_criterion_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit criterion description</span></a>
+          <a href="#" class="delete_criterion_link" role="button"><i class="icon-trash standalone-icon"></i><span class="screenreader-only">Delete criterion row</span></a>
+      </div>
+      <div class="description_content">
+        <span class="outcome_sr_content" aria-hidden="true">
+          <i class="learning_outcome_flag icon-outcomes" aria-hidden="true"></i>
+          <span class="screenreader-only">This criterion is linked to a Learning Outcome</span>
+        </span>
+        <span class="description description_title">Description of criterion</span>
+        <span class="learning_outcome_id" style="display: none;"></span>
+        <span class="criterion_id" style="display: none;"></span>
+          <div class="long_description small_description"></div>
+        <div class="hide_when_learning_outcome ">
+          <div class="criterion_use_range_div editing toggle_for_hide_points ">
+            <label>Range
+              <input type="checkbox" class="criterion_use_range" /></label>
+          </div>
+        </div>
+        <div class="threshold toggle_for_hide_points ">
+          threshold:
+          <span class="mastery_points">5</span> pts
+        </div>
+      </div>
+
+    </div>
+  </td>
+  <td style="padding: 0;">
+      <table class="ratings" style=""><tr>
+          <td class="rating edge_rating
+                
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">5</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">Full Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank</span>
+              </div>
+                <div class="editing links add_rating_link">
+                  <a href="#" class="add_rating_link_after" aria-label="Add rating" role="button"><i class="icon-add icon-Solid"></i></a>
+                </div>
+            </div>
+          </td>
+          <td class="rating edge_rating
+                infinitesimal
+                "
+          >
+            <div class="container">
+              <div class="rating-main">
+                  <div class="editing links">
+                    <a href="#" class="edit_rating_link" role="button"><i class="icon-edit standalone-icon"></i><span class="screenreader-only">Edit rating</span></a>
+                    <a href="#" class="delete_rating_link"><i class="icon-trash standalone-icon" ></i><span class="screenreader-only">Delete rating</span></a>
+                  </div>
+                  <div class="clear"></div>
+                <span class="nobr toggle_for_hide_points ">
+                  <span class="points">0</span>
+                  <span class="range_rating" style="display: none;">to ><span class="min_points">0</span></span> pts
+                </span>
+                <div class="description rating_description_value">No Marks</div>
+                <div class="rating_long_description small_description"></div>
+                <span class="rating_id" style="display: none;">blank_2</span>
+              </div>
+            </div>
+          </td>
+      </tr></table>
+      <div style="display: none; font-size: 0.8em; margin: 5px;" class="custom_ratings">
+        This area will be used by the assessor to leave comments related to this criterion.
+      </div>
+  </td>
+  <td class="nobr points_form toggle_for_hide_points ">
+    <div class="editing" style="white-space: normal">
+      <span style="white-space: nowrap; font-size: 0.8em">
+          
+            <input
+              type="text"
+              aria-label="Points"
+              value="5"
+              class="criterion_points span1 no-margin-bottom"
+            />
+           pts
+      </span><br />
+    </div>
+    <div class="displaying">
+      <span style="white-space: nowrap;">
+        <span class="criterion_rating_points_holder" style="display: none;">
+          <span class="criterion_rating_points">&nbsp;</span> /
+        </span>
+        <span class="display_criterion_points">5</span> pts<br />
+      </span>
+    </div>
+    <div class="ignoring">
+      <span> -- </span>
+    </div>
+    <div class="criterion_comments">
+        <a href="#" class="no-hover criterion_comments_link" title="Additional Comments">
+          <img alt="Additional Comments" src="https://du11hjcvx0uqb.cloudfront.net/dist/images/rubric_comment-ddae8546ab.png" />
+        </a>
+        <div class="custom_rating" style="display: none;"></div>
+    </div>
+  </td>
+</tr>
+
+  <tr class="summary">
+    <td colspan="4">
+      <div class="total_points_holder toggle_for_hide_points "
+        style="float: right; ">
+        <span>Total Points:
+            <span class="rubric_total">
+              5
+            </span>
+ <span class="assessing">out of 5</span>        </span>
+      </div>
+      <div class="editing pull-left">
+        <span id="add_criterion_holder" class="criterion_link"></span>
+      </div>
+      <div class="clear"></div>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<table style="display: none;">
+  <tr id="edit_rubric">
+    <td colspan="4">
+      <form id="edit_rubric_form" class="edit-rubric-form no-margin-bottom">
+        <div class="rubric_custom_ratings" style="">
+          <input type="checkbox" id="rubric_custom_rating" class="rubric_custom_rating" />
+          <label for="rubric_custom_rating">I&#39;ll write free-form comments when assessing students</label>
+        </div>
+          <div class="hide_points" style="">
+            <input type="checkbox" id="hide_points" class="hide_points_checkbox" />
+            <label for="hide_points">Remove points from rubric</label>
+          </div>
+          <div class="hide_outcome_results" style="">
+            <input type="checkbox" id="hide_outcome_results" class="hide_outcome_results_checkbox" />
+            <label for="hide_outcome_results">Don&#39;t post Outcomes results to Learning Mastery Gradebook</label>
+          </div>
+          <div class="rubric_grading" style="">
+            <input type="checkbox" id="grading_rubric" class="grading_rubric_checkbox" />
+            <label for="grading_rubric">Use this rubric for assignment grading</label>
+          </div>
+        <div class="totalling_rubric" style="">
+          <input type="checkbox" id="totalling_rubric" class="totalling_rubric_checkbox" />
+          <label for="totalling_rubric">Hide score total for assessment results</label>
+        </div>
+        <div class="ic-Action-header ic-Action-header--half-margin">
+          <div class="ic-Action-header__Primary">
+            <button type="button" class="Button cancel_button">Cancel</button>
+            <button type="submit" class="Button Button--primary save_button">Create Rubric</button>
+          </div>
+        </div>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+  <div id="assignment_external_tools"></div>
+
+  
+
+
+          </div>
+        </div>
+        <div id="right-side-wrapper" class="ic-app-main-content__secondary">
+          <aside id="right-side" role="complementary">
+            
+<div id="sidebar_content">
+
+    
+<div class="details">
+  <h2>Submission</h2>
+    <div class="header">
+        <i class="icon-check" aria-hidden="true"></i>
+        Submitted!
+    </div>
+  <div class="content">
+    <span class="">
+        Apr 16, 2020 at 8:33am
+    </span>
+
+    <div>
+      <a href="/courses/176717/assignments/807809/submissions/210042">
+        Submission Details
+      </a>
+    </div>
+
+        <div>
+          <a href="/courses/176717/assignments/807809/submissions/210042?download=12459439">
+            Download ice_cover.py
+          </a>
+        </div>
+        <span class="assignment_presenter_for_submission" style="display: none;">success</span>
+        <span class="react_pill_container"></span>
+        <div>
+          <a href="/courses/176717/assignments/807809/submissions/210042?download=12459440">
+            Download ice_cover_final.txt
+          </a>
+        </div>
+        <span class="assignment_presenter_for_submission" style="display: none;">success</span>
+        <span class="react_pill_container"></span>
+
+    <div class="module">
+          <div>Grade: 94 <span style="font-size: 0.8em;">(100 pts possible)</span></div>
+          <div>Graded Anonymously: no</div>
+
+        <a href="/courses/176717/assignments/807809/submissions/210042#rubric" class='Submission__Link--has-icon'>
+          <i class="icon-rubric" aria-hidden="true"></i>
+          View Rubric Evaluation
+        </a>
+    </div>
+
+
+    <div class="comments module">
+        <h3>Comments: </h3>
+
+        
+          <div id="comment-3370448" class="comment">
+            <div class="comment_content" data-content="See attached files."></div>
+            <div class="comment_attachments">
+                <div class="comment_attachment">
+                  <a href="/courses/176717/assignments/807809/submissions/210042?comment_id=3370448&amp;download=12851680" class="comment_attachment_link zip">laiyongzhi.zip</a>
+                </div>
+            </div>
+            <div class="signature" style="font-size: 0.8em; text-align: right;">
+              Erik Bjorklund, May 1, 2020 at 10:16pm
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div style="display:none;"><!-- Everything inside of this should always stay hidden -->
+        <div id="page_view_id">73a07caf-de02-42ee-93ac-a7f4600c433f</div>
+    </div>
+  <div id='aria_alerts' class='hide-text affix' role="alert" aria-live="assertive"></div>
+  <div id='StudentTray__Container'></div>
+    <div class="NewUserTutorialTray__Container"></div>
+  <div id="react-router-portals"></div>
+  
+
+  <iframe src="https://sso.canvaslms.com/post_message_forwarding?rev=59677caad5-de8233d392aa15f4&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJwYXJlbnRfZG9tYWluIjoiY2FudmFzLndpc2MuZWR1In0.Vn8_7bMNTbXrR91PBjKlQirgswiqpPUPf9FKxmafm8AhCw4ZfBrA7WOraGeDcLgBsrk4TM_k0DZMTAXtmA5J-A" name="post_message_forwarding" title="post_message_forwarding" id="post_message_forwarding" sandbox="allow-scripts allow-same-origin" style="display:none;"></iframe>
+
+
+  <script>
+    Object.assign(
+      ENV,
+      {}
+    )
+  </script>
+
+<script>
+//<![CDATA[
+(window.bundles || (window.bundles = [])).push('inst_fs_service_worker');
+//]]>
+</script>
+  <script src="https://instructure-uploads.s3.amazonaws.com/account_83960000000000001/attachments/40260075/MadisonBeta3.js" defer="defer"></script>
+  <script src="https://instructure-uploads.s3.amazonaws.com/account_83960000000000001/attachments/27416442/MadisonCourseCatalog.js" defer="defer"></script>
+
+</div> <!-- #application -->
+</body>
+</html>
